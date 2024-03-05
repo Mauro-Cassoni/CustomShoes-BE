@@ -18,6 +18,7 @@ public class Product {
 
     private String brand;
 
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     private String description;
