@@ -34,7 +34,6 @@ public class UserRequest {
 
     private Role role;
 
-    @NotBlank(message = "shipping address request")
     private Address shippingAddress;
 
     //Business
