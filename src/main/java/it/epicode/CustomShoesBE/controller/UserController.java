@@ -1,6 +1,5 @@
 package it.epicode.CustomShoesBE.controller;
 
-import com.cloudinary.Cloudinary;
 import it.epicode.CustomShoesBE.exception.AlreadyAdminException;
 import it.epicode.CustomShoesBE.exception.BadRequestExceptionHandler;
 import it.epicode.CustomShoesBE.exception.NotFoundException;

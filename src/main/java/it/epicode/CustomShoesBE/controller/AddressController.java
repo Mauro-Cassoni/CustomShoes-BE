@@ -10,6 +10,7 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ public class AddressController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or @addressSecurity.checkUserId(authentication, #id)")
     public ResponseEntity<DefaultResponse> getById(@PathVariable Long id) throws NotFoundException {
         return DefaultResponse.noMessage(addressService.getById(id),HttpStatus.OK);
     }

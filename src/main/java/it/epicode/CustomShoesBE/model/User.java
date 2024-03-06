@@ -116,6 +116,6 @@ public class User implements UserDetails {
     @JsonIgnore
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 }
