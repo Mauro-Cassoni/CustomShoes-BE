@@ -49,10 +49,11 @@ public class UserService {
         User x = new User();
         x.setEmail(userRequest.getEmail());
         x.setPassword(encoder.encode(userRequest.getPassword()));
-        x.setFirstname(userRequest.getFirstname());
-        x.setLastname(userRequest.getLastname());
+        x.setName(userRequest.getName());
+        x.setSurname(userRequest.getSurname());
         x.setPhoneNumber(userRequest.getPhoneNumber());
         x.setRole(Role.USER);
+        x.setUserType(userRequest.getUserType());
 
         x.setBusinessName(userRequest.getBusinessName());
         x.setVatNumber(userRequest.getVatNumber());
@@ -66,10 +67,11 @@ public class UserService {
         User x = getById(id);
         x.setEmail(userRequest.getEmail());
         x.setPassword(encoder.encode(userRequest.getPassword()));
-        x.setFirstname(userRequest.getFirstname());
-        x.setLastname(userRequest.getLastname());
+        x.setName(userRequest.getName());
+        x.setSurname(userRequest.getSurname());
         x.setPhoneNumber(userRequest.getPhoneNumber());
         x.setRole(Role.USER);
+        x.setUserType(userRequest.getUserType());
 
         x.setBusinessName(userRequest.getBusinessName());
         x.setVatNumber(userRequest.getVatNumber());

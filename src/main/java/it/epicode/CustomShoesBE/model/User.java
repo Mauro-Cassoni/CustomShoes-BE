@@ -2,6 +2,7 @@ package it.epicode.CustomShoesBE.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.epicode.CustomShoesBE.enums.Role;
+import it.epicode.CustomShoesBE.enums.UserType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Data;
@@ -28,9 +29,9 @@ public class User implements UserDetails {
     @JsonIgnore
     private String password;
 
-    private String firstname;
+    private String name;
 
-    private String lastname;
+    private String surname;
 
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
@@ -51,6 +52,10 @@ public class User implements UserDetails {
     @OneToOne
     @JoinColumn(name = "shipping_address")
     private Address  shippingAddress;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_type")
+    private UserType userType;
 
     //Business
 

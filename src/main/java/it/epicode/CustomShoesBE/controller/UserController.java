@@ -1,5 +1,6 @@
 package it.epicode.CustomShoesBE.controller;
 
+import it.epicode.CustomShoesBE.enums.UserType;
 import it.epicode.CustomShoesBE.exception.AlreadyAdminException;
 import it.epicode.CustomShoesBE.exception.BadRequestExceptionHandler;
 import it.epicode.CustomShoesBE.exception.NotFoundException;

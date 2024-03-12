@@ -45,10 +45,11 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<DefaultResponse> registerUser(@RequestBody @Validated UserRequest userRequest, BindingResult bindingResult) throws BadRequestExceptionHandler {
+        System.out.println("ciao");
         if(bindingResult.hasErrors()){
             throw new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         }
-
+        System.out.println("ciao2");
         sendEmail(userRequest.getEmail());
         return DefaultResponse.noMessage(userService.save(userRequest), HttpStatus.CREATED);
     }

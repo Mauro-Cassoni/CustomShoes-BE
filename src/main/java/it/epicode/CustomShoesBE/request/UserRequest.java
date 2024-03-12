@@ -1,11 +1,14 @@
 package it.epicode.CustomShoesBE.request;
 
 import it.epicode.CustomShoesBE.enums.Role;
+import it.epicode.CustomShoesBE.enums.UserType;
 import it.epicode.CustomShoesBE.model.Address;
 import it.epicode.CustomShoesBE.model.Invoice;
 import it.epicode.CustomShoesBE.model.Product;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -19,15 +22,17 @@ public class UserRequest {
     private String email;
 
     @NotBlank(message = "password request")
+    @Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>.]).{8,}$",
+            message = "Password must contain: 1 letter uppercase, 1 letter lowercase, 1 number, 1 special character, Min 8 char")
     private String password;
 
     @NotBlank(message = "firstname request")
-    private String firstname;
+    private String name;
 
     @NotBlank(message = "lastname request")
-    private String lastname;
+    private String surname;
 
-    @NotBlank(message = "phone number request")
+
     private String phoneNumber;
 
     private List<Product> wishlist;
@@ -35,6 +40,10 @@ public class UserRequest {
     private Role role;
 
     private Address shippingAddress;
+
+    @NotNull
+    private UserType userType;
+
 
     //Business
 

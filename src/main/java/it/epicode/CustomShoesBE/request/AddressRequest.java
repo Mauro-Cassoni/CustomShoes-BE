@@ -22,7 +22,7 @@ public class AddressRequest {
     private String city;
 
     @NotBlank(message = "postal code request")
-    private String postalCode;
+    private Integer postalCode;
 
     @NotBlank(message = "country request")
     private String country;

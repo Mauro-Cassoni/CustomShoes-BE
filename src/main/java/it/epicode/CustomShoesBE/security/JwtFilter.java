@@ -34,7 +34,7 @@ public class JwtFilter extends OncePerRequestFilter {
         try {jwtTools.validateToken(token);}
         catch (UnauthorizedException e) {throw new RuntimeException(e);}
 
-        String email= jwtTools.extractUsername(token);
+        String email= jwtTools.extractEmail(token);
         try {
             User user=userService.findByEmail(email);
             System.out.println(user.getAuthorities());
@@ -45,7 +45,12 @@ public class JwtFilter extends OncePerRequestFilter {
         catch (NotFoundException e) {throw new RuntimeException(e);}
     }
     @Override
-    protected boolean shouldNotFilter(HttpServletRequest request){
-        return new AntPathMatcher().match("/api/auth/**", request.getServletPath());
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String[] pathsToMatch = {"/auth/**"};
+        for(String path:pathsToMatch){
+
+            if(new AntPathMatcher().match(path, request.getServletPath())) return true;
+        }
+        return false;
     }
 }
