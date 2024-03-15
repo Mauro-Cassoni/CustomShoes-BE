@@ -45,7 +45,6 @@ public class User implements UserDetails {
     )
     private List<Product> wishlist;
 
-    @JsonIgnore
     @Enumerated(EnumType.STRING)
     private Role role;
 

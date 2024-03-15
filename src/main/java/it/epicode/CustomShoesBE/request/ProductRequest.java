@@ -8,7 +8,6 @@ import org.hibernate.validator.constraints.URL;
 @Data
 public class ProductRequest {
 
-    @NotBlank(message = "img request")
     @URL
     private String img;
 
@@ -18,7 +17,7 @@ public class ProductRequest {
     private String brand;
 
     @NotBlank(message = "category request")
-    private Category category;
+    private String category;
 
     @NotBlank(message = "description request")
     private String description;
@@ -30,10 +29,11 @@ public class ProductRequest {
     @NotBlank(message = "price request")
     private double price;
 
+    private boolean onSale;
 
-
-
-
+    public boolean getOnSale() {
+        return onSale;
+    }
 
 
 }

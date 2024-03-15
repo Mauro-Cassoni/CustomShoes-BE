@@ -20,8 +20,7 @@ public class Product {
 
     private String brand;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    private String category;
 
     private String description;
 
@@ -30,6 +29,9 @@ public class Product {
     private String color;
 
     private double price;
+
+    @Column(name = "on_sale")
+    private boolean onSale;
 
 
     @JsonIgnore

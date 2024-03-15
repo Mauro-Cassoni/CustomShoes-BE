@@ -3,6 +3,7 @@ package it.epicode.CustomShoesBE.controller;
 import it.epicode.CustomShoesBE.exception.BadRequestExceptionHandler;
 import it.epicode.CustomShoesBE.exception.NotFoundException;
 import it.epicode.CustomShoesBE.model.User;
+import it.epicode.CustomShoesBE.request.LoginRequest;
 import it.epicode.CustomShoesBE.request.UserRequest;
 import it.epicode.CustomShoesBE.responses.DefaultResponse;
 import it.epicode.CustomShoesBE.responses.LoginResponse;
@@ -53,7 +54,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> loginUser(@RequestBody @Validated UserRequest userRequest, BindingResult bindingResult) throws BadRequestExceptionHandler, NotFoundException, NotFoundException {
+    public ResponseEntity<LoginResponse> loginUser(@RequestBody @Validated LoginRequest userRequest, BindingResult bindingResult) throws BadRequestExceptionHandler, NotFoundException, NotFoundException {
         if(bindingResult.hasErrors())
             throw new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         User user=userService.findByEmail(userRequest.getEmail());

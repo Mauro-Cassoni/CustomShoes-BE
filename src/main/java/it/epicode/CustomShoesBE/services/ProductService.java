@@ -34,6 +34,7 @@ public class ProductService {
         x.setSize(productRequest.getSize());
         x.setColor(productRequest.getColor());
         x.setPrice(productRequest.getPrice());
+        x.setOnSale(productRequest.getOnSale());
 
         return productRepository.save(x);
     }
@@ -48,6 +49,11 @@ public class ProductService {
         x.setSize(productRequest.getSize());
         x.setColor(productRequest.getColor());
         x.setPrice(productRequest.getPrice());
+        x.setOnSale(productRequest.getOnSale());
+
+        if(x.getImg() == null){
+            x.setOnSale(false);
+        }
 
         return productRepository.save(x);
     }

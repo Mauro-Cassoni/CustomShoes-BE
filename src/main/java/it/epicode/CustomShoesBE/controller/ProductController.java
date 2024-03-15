@@ -34,7 +34,7 @@ public class ProductController {
     @PatchMapping("/{id}/upload")
     public ResponseEntity<DefaultResponse> uploadImg(@PathVariable long id, @RequestParam("upload") MultipartFile file) throws IOException, NotFoundException, NotFoundException {
         Product x = productService.uploadImg(id, (String)cloudinary.uploader().upload(file.getBytes(), new HashMap()).get("url"));
-        return DefaultResponse.full("Avatar was uploaded successfully", x , HttpStatus.OK);
+        return DefaultResponse.full("Image was uploaded successfully", x , HttpStatus.OK);
     }
 
     @GetMapping("")
