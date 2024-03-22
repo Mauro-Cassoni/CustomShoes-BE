@@ -34,7 +34,7 @@ public class ProductService {
         x.setSize(productRequest.getSize());
         x.setColor(productRequest.getColor());
         x.setPrice(productRequest.getPrice());
-        x.setOnSale(productRequest.getOnSale());
+        x.setOnSale(false);
 
         return productRepository.save(x);
     }

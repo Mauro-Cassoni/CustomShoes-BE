@@ -31,35 +31,38 @@ public class ProductController {
     @Autowired
     private Cloudinary cloudinary;
 
-    @PatchMapping("/{id}/upload")
+    @PatchMapping("/upload/{id}")
     public ResponseEntity<DefaultResponse> uploadImg(@PathVariable long id, @RequestParam("upload") MultipartFile file) throws IOException, NotFoundException, NotFoundException {
         Product x = productService.uploadImg(id, (String)cloudinary.uploader().upload(file.getBytes(), new HashMap()).get("url"));
         return DefaultResponse.full("Image was uploaded successfully", x , HttpStatus.OK);
     }
 
-    @GetMapping("")
+    @GetMapping("/no-auth")
     public ResponseEntity<DefaultResponse> getAll(Pageable pageable){
         return DefaultResponse.noMessage(productService.getAll(pageable), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/no-auth/{id}")
     public ResponseEntity<DefaultResponse> getById(@PathVariable Long id)throws NotFoundException {
         return DefaultResponse.noMessage(productService.getById(id), HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping("/create")
     public ResponseEntity<DefaultResponse> create(@RequestBody @Validated ProductRequest productRequest, BindingResult bindingResult) throws NotFoundException, BadRequestExceptionHandler {
-        if (bindingResult.hasErrors()) throw  new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
-        return DefaultResponse.noMessage(productService.save(productRequest), HttpStatus.OK);
+        if (bindingResult.hasErrors()) {
+            throw new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
+        }
+        Product createdProduct = productService.save(productRequest);
+        return DefaultResponse.noMessage(createdProduct, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<DefaultResponse> update(@PathVariable long id, @RequestBody ProductRequest productRequest, BindingResult bindingResult) throws NotFoundException, BadRequestExceptionHandler {
         if (bindingResult.hasErrors()) throw new  BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         return DefaultResponse.noMessage(productService.update(id, productRequest), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<DefaultResponse> delete(@PathVariable Long id)throws NotFoundException{
         productService.delete(id);
         return DefaultResponse.noObject("Product with id " + id + " has been deleted", HttpStatus.OK);

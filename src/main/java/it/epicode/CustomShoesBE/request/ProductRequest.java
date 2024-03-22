@@ -2,6 +2,7 @@ package it.epicode.CustomShoesBE.request;
 
 import it.epicode.CustomShoesBE.enums.Category;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
@@ -26,7 +27,7 @@ public class ProductRequest {
 
     private String color;
 
-    @NotBlank(message = "price request")
+    @NotNull(message = "price request")
     private double price;
 
     private boolean onSale;
